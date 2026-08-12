@@ -115,7 +115,7 @@ if fetch_clicked:
     all_data = []
     failed_symbols = []
 
-"""---- Intraday date enforcement ----"""
+"""----Intraday date enforcement ----"""
     if data_type == "Intraday":
         max_days = 7 if interval == "1m" else 60
         allowed_start = end_date - timedelta(days=max_days)
