@@ -13,19 +13,19 @@ import pandas as pd
 import logging
 from datetime import date, timedelta
 
-"""# ---------------- LOGGING ----------------"""
+"""---------------- LOGGING ----------------"""
 
 import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-"""# ---------------- PAGE CONFIG ----------------"""
+"""---------------- PAGE CONFIG ----------------"""
 
 st.set_page_config(page_title="Stock Data Downloader", layout="wide")
 st.title("📈 NSE / BSE Stock Data Downloader")
 
-# ---------------- SIDEBAR ----------------
+ ---------------- SIDEBAR ----------------
 
 st.sidebar.header("⚙️ Configuration")
 
@@ -57,7 +57,7 @@ end_date = st.sidebar.date_input("End Date", date.today())
 
 output_format = st.sidebar.selectbox("Output Format", ["CSV", "Excel"])
 
-"""# ---------------- INTRADAY NOTE ----------------"""
+"""---------------- INTRADAY NOTE ----------------"""
 
 if data_type == "Intraday":
     st.info(
@@ -67,7 +67,7 @@ if data_type == "Intraday":
         "- Date range will be **auto-adjusted automatically**"
     )
 
-"""# ---------------- SYMBOL INPUT ----------------"""
+"""---------------- SYMBOL INPUT ----------------"""
 
 st.subheader("📌 Stock Symbols")
 
@@ -101,11 +101,11 @@ else:
     if symbol_text:
         symbols = [s.strip().upper() for s in symbol_text.split(",") if s.strip()]
 
-"""# ---------------- FETCH BUTTON (ONLY ONCE) ----------------"""
+"""---------------- FETCH BUTTON (ONLY ONCE) ----------------"""
 
 fetch_clicked = st.button("🚀 Fetch Data")
 
-"""# ---------------- FETCH LOGIC ----------------"""
+"""---------------- FETCH LOGIC ----------------"""
 
 if fetch_clicked:
     if not symbols:
@@ -115,7 +115,7 @@ if fetch_clicked:
     all_data = []
     failed_symbols = []
 
-    # ---- Intraday date enforcement ----
+     ---- Intraday date enforcement ----
     if data_type == "Intraday":
         max_days = 7 if interval == "1m" else 60
         allowed_start = end_date - timedelta(days=max_days)
@@ -170,14 +170,14 @@ if fetch_clicked:
         ["Date", "Symbol", "Open", "High", "Low", "Close", "Volume"]
     ]
 
-    # ---------------- EXCEL TIMEZONE FIX ----------------
+     ---------------- EXCEL TIMEZONE FIX ----------------
     if pd.api.types.is_datetime64_any_dtype(final_df["Date"]):
         final_df["Date"] = final_df["Date"].dt.tz_localize(None)
 
     st.success("✅ Data fetched successfully")
     st.dataframe(final_df, use_container_width=True)
 
-    # ---------------- DOWNLOAD ----------------
+     ---------------- DOWNLOAD ----------------
     if output_format == "CSV":
         csv = final_df.to_csv(index=False).encode("utf-8")
         st.download_button(
