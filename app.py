@@ -115,7 +115,7 @@ if fetch_clicked:
     all_data = []
     failed_symbols = []
 
-     ---- Intraday date enforcement ----
+"""---- Intraday date enforcement ----"""
     if data_type == "Intraday":
         max_days = 7 if interval == "1m" else 60
         allowed_start = end_date - timedelta(days=max_days)
@@ -146,7 +146,7 @@ if fetch_clicked:
                 data["Symbol"] = symbol
                 data.reset_index(inplace=True)
 
-                # ---- Fix Date vs Datetime ----
+"""---- Fix Date vs Datetime ----"""
                 if "Datetime" in data.columns:
                     data.rename(columns={"Datetime": "Date"}, inplace=True)
 
