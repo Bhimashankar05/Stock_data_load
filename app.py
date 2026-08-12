@@ -160,7 +160,7 @@ if fetch_clicked:
 
         progress.progress((i + 1) / len(symbols))
 
-    # ---------------- FINAL DATAFRAME ----------------
+"""---------------- FINAL DATAFRAME ----------------"""
     if not all_data:
         st.error("❌ No data fetched. Check symbols or date range.")
         st.stop()
@@ -170,14 +170,14 @@ if fetch_clicked:
         ["Date", "Symbol", "Open", "High", "Low", "Close", "Volume"]
     ]
 
-     ---------------- EXCEL TIMEZONE FIX ----------------
+"""---------------- EXCEL TIMEZONE FIX ----------------"""
     if pd.api.types.is_datetime64_any_dtype(final_df["Date"]):
         final_df["Date"] = final_df["Date"].dt.tz_localize(None)
 
     st.success("✅ Data fetched successfully")
     st.dataframe(final_df, use_container_width=True)
 
-     ---------------- DOWNLOAD ----------------
+"""---------------- DOWNLOAD ----------------"""
     if output_format == "CSV":
         csv = final_df.to_csv(index=False).encode("utf-8")
         st.download_button(
