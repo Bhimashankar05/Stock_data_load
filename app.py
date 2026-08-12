@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 st.set_page_config(page_title="Stock Data Downloader", layout="wide")
 st.title("📈 NSE / BSE Stock Data Downloader")
 
- ---------------- SIDEBAR ----------------
+ """---------------- SIDEBAR ----------------"""
 
 st.sidebar.header("⚙️ Configuration")
 
