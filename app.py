@@ -7,8 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1RXSiz6mbXMH8y0n_TENRUWmbnHWbzmQ6
 """
 
-!pip install streamlit yfinance pandas xlsxwriter openpyxl
-
 import streamlit as st
 import yfinance as yf
 import pandas as pd
